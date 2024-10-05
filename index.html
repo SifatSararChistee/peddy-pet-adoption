@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pet Adoption</title>
 
+    <!-- font awesome CDN -->
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <!-- google font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -128,7 +130,56 @@
           At Peddy, we’re passionate about connecting animals in need with loving, caring families. <br> Our mission is to make pet adoption easy, enjoyable, and transparent, ensuring that each pet finds the perfect match
         </p>
       </section>
+      <!-- catagories -->
+      <section class="mx-auto w-11/12 max-w-screen-xl mt-11 flex justify-between hidden">
+        <button class="btn w-[300px] p-7">Dogs</button>
+        <button class="btn">Dogs</button>
+        <button class="btn">Dogs</button>
+        <button class="btn">Dogs</button>
+      </section>
     </main>
+    <footer class="footer bg-[#131313] text-white p-10 mt-10">
+<section class="mx-auto w-11/12 max-w-screen-xl flex flex-col justify-center lg:flex-row md:flex-row lg:justify-between md:justify-between items-start md:items-center lg:items-center">     
+  <nav class="flex flex-col space-y-3">
+  <h6>         
+    <a class="flex items-center gap-4 text-3xl font-bold text-white"
+    ><img src="assets/logo.webp" alt="" />Peddy</a
+  ></h6>
+<p>
+  Location: av. Washington 165, NY CA 54003 <br>
+Phone: +31 85 964 47 25 <br>
+Email: info@yourdomain.com <br>
+Openings hours: 9.00 AM - 5.00 PM
+</p>
+<div class="text-3xl flex gap-2">
+  <i class="fa-brands fa-facebook "></i>
+  <i class="fa-brands fa-x-twitter"></i>
+  <i class="fa-brands fa-youtube"></i>
+  <i class="fa-brands fa-square-instagram"></i>
+</div>
+</nav>
+<nav class="flex flex-col space-y-2">
+  <h6 class="footer-title">Useful Links</h6>
+  <a class="link link-hover">Home</a>
+  <a class="link link-hover">  About Us</a>
+  <a class="link link-hover"> Animals</a>
+  <a class="link link-hover"> Foundation</a>
+  <a class="link link-hover">Contact</a>
+</nav>
+<form class="space-y-2">
+  <h6 class="text-2xl font-bold text-white">Drop a message</h6>
+  <fieldset class="form-control w-56">
+    <div class="flex flex-col">
+      <input
+        type="text"
+        placeholder="Enter your email address"
+        class="input input-bordered rounded-lg" /> <br>
+      <button class="btn bg-[#0E7A81] rounded-lg text-white text-xl">Subscribe</button>
+    </div>
+  </fieldset>
+</form></section>
+
+    </footer>
     <script src="./js/index.js"></script>
   </body>
 </html>
