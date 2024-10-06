@@ -133,7 +133,7 @@ const detailsBtn = async (id) => {
   } = data.petData;
   const modal = document.createElement("div");
   modal.innerHTML = `
-   <div class="modal-box w-full h-[800px] space-y-3">
+   <div class="modal-box lg:w-full md:w-full w-2/3 h-[500px] lg:h-[800px] space-y-3">
     <div class="p-4">
       <img class="w-full rounded-xl" src=${image} alt="">
     </div>
