@@ -18,12 +18,12 @@ const displayCatagories = (categories) => {
   });
 };
 
-const loadCards = async () => {
+const loadAllCards = async () => {
   const response = await fetch(
-    "https://openapi.programming-hero.com/api/peddy/category/cat"
+    "https://openapi.programming-hero.com/api/peddy/pets"
   );
   const data = await response.json();
-  displayCards(data.data);
+  displayCards(data.pets);
 };
 
 const displayCards = (card) => {
@@ -41,10 +41,10 @@ const displayCards = (card) => {
                 </figure>
                 <div class="card-body items-start">
                   <h2 class="card-title">${pet_name}</h2>
-                  <p><i class="fa-solid fa-list mr-2"></i>Breed:${breed}</p>
-                  <p><i class="fa-regular fa-calendar mr-2"></i>Birth:${date_of_birth}</p>
-                  <p><i class="fa-solid fa-mercury mr-2"></i>Gender:${gender}</p>
-                  <p><i class="fa-solid fa-dollar-sign mr-2"></i>Price:${price}</p>
+                  <p><i class="fa-solid fa-list mr-2"></i>Breed: ${breed}</p>
+                  <p><i class="fa-regular fa-calendar mr-2"></i>Birth: ${date_of_birth}</p>
+                  <p><i class="fa-solid fa-mercury mr-2"></i>Gender: ${gender}</p>
+                  <p><i class="fa-solid fa-dollar-sign mr-2"></i>Price: ${price}</p>
                   <div class="flex justify-between w-full">
                     <button class="btn"><i class="fa-regular fa-thumbs-up"></i></button>
                     <button class="btn text-[#0E7A81]">Adopt</button>
@@ -58,4 +58,4 @@ const displayCards = (card) => {
 };
 
 loadCatagories();
-loadCards();
+loadAllCards();
