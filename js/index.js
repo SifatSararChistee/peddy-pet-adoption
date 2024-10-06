@@ -1,3 +1,4 @@
+//load category buttons
 const loadCatagories = async () => {
   const response = await fetch(
     "https://openapi.programming-hero.com/api/peddy/categories"
@@ -6,18 +7,29 @@ const loadCatagories = async () => {
   displayCatagories(data.categories);
 };
 
+//load Each category
+const loadEachCategory = async (category) => {
+  const response = await fetch(
+    `https://openapi.programming-hero.com/api/peddy/category/${category}`
+  );
+  const data = await response.json();
+  displayCards(data.data);
+};
+
+//display category buttons
 const displayCatagories = (categories) => {
   categories.forEach((categoryItem) => {
     const { category, category_icon } = categoryItem;
     const div = document.createElement("div");
     div.classList.add("flex", "justify-center", "items-center", "p-6");
     div.innerHTML = `
-        <button class="btn w-[150px]"><img class="w-8" src="${category_icon}" alt="">${category}</button>
+        <button onclick='loadEachCategory("${category}")' class="btn w-[150px]"><img class="w-8" src="${category_icon}" alt="">${category}</button>
     `;
     document.getElementById("catagories").append(div);
   });
 };
 
+//load all cards
 const loadAllCards = async () => {
   const response = await fetch(
     "https://openapi.programming-hero.com/api/peddy/pets"
@@ -26,10 +38,11 @@ const loadAllCards = async () => {
   displayCards(data.pets);
 };
 
+//Display all cards
 const displayCards = (card) => {
+  document.getElementById("cards-container").innerHTML = "";
   card.forEach((item) => {
     const { pet_name, image, gender, date_of_birth, breed, price } = item;
-    console.log(pet_name, image, gender, date_of_birth, breed, price);
     const div = document.createElement("div");
     div.innerHTML = `
                   <div class="card bg-base-100 w-[300px] shadow-xl">
