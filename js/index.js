@@ -7,12 +7,22 @@ const loadCatagories = async () => {
   displayCatagories(data.categories);
 };
 
+const removeClass = () => {
+  const buttons = document.getElementsByClassName("category-btn");
+  for (let btn of buttons) {
+    btn.classList.remove("active-btn");
+  }
+};
+
 //load Each category
 const loadEachCategory = async (category) => {
   const response = await fetch(
     `https://openapi.programming-hero.com/api/peddy/category/${category}`
   );
   const data = await response.json();
+  removeClass();
+  const button = document.getElementById(`btn-${category}`);
+  button.classList.add("active-btn");
   displayCards(data.data);
 };
 
@@ -23,7 +33,7 @@ const displayCatagories = (categories) => {
     const div = document.createElement("div");
     div.classList.add("flex", "justify-center", "items-center", "p-6");
     div.innerHTML = `
-        <button id=${category} onclick='loadEachCategory("${category}")' class="btn w-[150px]"><img class="w-8" src="${category_icon}" alt="">${category}</button>
+        <button id="btn-${category}" onclick='loadEachCategory("${category}")' class="btn category-btn w-[150px]"><img class="w-8" src="${category_icon}" alt="">${category}</button>
     `;
     document.getElementById("catagories").append(div);
   });
@@ -101,6 +111,7 @@ const displayCards = (card) => {
   }
 };
 
+//like btn funtions
 const likeBtn = async (id) => {
   const response = await fetch(
     `https://openapi.programming-hero.com/api/peddy/pet/${id}`
@@ -114,6 +125,7 @@ const likeBtn = async (id) => {
   document.getElementById("right-side").append(div);
 };
 
+//details btn functions
 const detailsBtn = async (id) => {
   document.getElementById("modal").innerHTML = "";
   const response = await fetch(
