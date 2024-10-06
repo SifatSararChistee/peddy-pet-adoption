@@ -53,7 +53,8 @@ const displayCards = (card) => {
   } else {
     document.getElementById("cards-container").innerHTML = "";
     card.forEach((item) => {
-      const { pet_name, image, gender, date_of_birth, breed, price } = item;
+      const { pet_name, image, gender, date_of_birth, breed, price, petId } =
+        item;
       const div = document.createElement("div");
       div.innerHTML = `
                     <div class="card bg-base-100 w-[300px] shadow-xl">
@@ -80,7 +81,7 @@ const displayCards = (card) => {
                       price == null ? "Not Mentioned" : price
                     }</p>
                     <div class="flex justify-between w-full">
-                      <button onclick="likeBtn()" class="btn"><i class="fa-regular fa-thumbs-up"></i></button>
+                      <button onclick="likeBtn(${petId})" class="btn"><i class="fa-regular fa-thumbs-up"></i></button>
                       <button class="btn text-[#0E7A81]">Adopt</button>
                       <button class="btn text-[#0E7A81]">Details</button>
                     </div>
@@ -90,6 +91,19 @@ const displayCards = (card) => {
       document.getElementById("cards-container").append(div);
     });
   }
+};
+
+const likeBtn = async (id) => {
+  const response = await fetch(
+    `https://openapi.programming-hero.com/api/peddy/pet/${id}`
+  );
+  const data = await response.json();
+  const div = document.createElement("div");
+  div.classList.add("h-[100px]");
+  div.innerHTML = `
+  <img class="rounded-lg" src=${data.petData.image} alt="">
+  `;
+  document.getElementById("right-side").append(div);
 };
 
 loadCatagories();
