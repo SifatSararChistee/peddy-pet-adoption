@@ -43,7 +43,15 @@ const displayCards = (card) => {
   if (card.length === 0) {
     document.getElementById("cards-container").innerHTML = "";
     const div = document.createElement("div");
-    div.classList.add("flex", "justify-center", "items-center", "flex-col");
+    div.classList.add(
+      "flex",
+      "justify-center",
+      "items-center",
+      "flex-col",
+      "col-span-3",
+      "bg-[#13131308]",
+      "p-10"
+    );
     div.innerHTML = `
     <img src="assets/error.webp" alt="">
     <h1 class="font-bold text-3xl">No Information Available</h1>
