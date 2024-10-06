@@ -91,7 +91,7 @@ const displayCards = (card) => {
                     <div class="flex justify-between w-full">
                       <button onclick="likeBtn(${petId})" class="btn"><i class="fa-regular fa-thumbs-up"></i></button>
                       <button class="btn text-[#0E7A81]">Adopt</button>
-                      <button class="btn text-[#0E7A81]">Details</button>
+                      <button onclick="detailsBtn(${petId})" class="btn text-[#0E7A81]">Details</button>
                     </div>
                   </div>
                 </div>
@@ -112,6 +112,63 @@ const likeBtn = async (id) => {
   <img class="rounded-lg" src=${data.petData.image} alt="">
   `;
   document.getElementById("right-side").append(div);
+};
+
+const detailsBtn = async (id) => {
+  document.getElementById("modal").innerHTML = "";
+  const response = await fetch(
+    `https://openapi.programming-hero.com/api/peddy/pet/${id}`
+  );
+  const data = await response.json();
+  console.log(data.petData);
+  const {
+    breed,
+    gender,
+    vaccinated_status,
+    date_of_birth,
+    price,
+    pet_details,
+    image,
+    pet_name,
+  } = data.petData;
+  const modal = document.createElement("div");
+  modal.innerHTML = `
+   <div class="modal-box w-full h-[800px] space-y-3">
+    <div class="p-4">
+      <img class="w-full rounded-xl" src=${image} alt="">
+    </div>
+    <h3 class="text-3xl font-bold">${
+      pet_name == null ? "Not Mentioned" : pet_name
+    }</h3>
+    <div class="flex justify-between">
+      <div>
+        <p>Breed: ${breed == null ? "Not Mentioned" : breed}</p>
+        <p>Gender: ${gender == null ? "Not Mentioned" : gender}</p>
+        <p>Vaccinated Status: ${
+          vaccinated_status == null ? "Not Mentioned" : vaccinated_status
+        }</p>
+      </div>
+      <div>
+        <p>Birth: ${date_of_birth == null ? "Not Mentioned" : date_of_birth}</p>
+        <p>Price: ${price == null ? "Not Mentioned" : price}</p>
+      </div>
+    </div>
+
+    <div>
+      <h1 class="text-xl font-bold">
+        Details Information
+      </h1>
+      <p>${pet_details}</p>
+    </div>
+    <div class="modal-action flex justify-center w-full">
+      <form method="dialog">
+        <button class="btn w-full px-52 bg-[#0E7A811A] text-[#0E7A81]">Cancel</button>
+      </form>
+    </div>
+  </div>
+  `;
+  document.getElementById("modal").append(modal);
+  document.getElementById("modal").showModal();
 };
 
 loadCatagories();
