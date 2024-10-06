@@ -100,7 +100,7 @@ const displayCards = (card) => {
                     }</p>
                     <div class="flex justify-between w-full">
                       <button onclick="likeBtn(${petId})" class="btn"><i class="fa-regular fa-thumbs-up"></i></button>
-                      <button onclick="adoptBtn()" class="btn text-[#0E7A81]">Adopt</button>
+                      <button id="btn-${petId}" onclick="adoptBtn(${petId})" class="btn text-[#0E7A81]">Adopt</button>
                       <button onclick="detailsBtn(${petId})" class="btn text-[#0E7A81]">Details</button>
                     </div>
                   </div>
@@ -184,12 +184,18 @@ const detailsBtn = async (id) => {
 };
 
 //adopt btn functions
-const adoptBtn = () => {
+const adoptBtn = async (id) => {
+  console.log(id);
+  const button = document.getElementById(`btn-${id}`);
+  button.innerText = "Adopted";
+  button.classList.add("bg-[#0E7A81]", "text-white");
+  button.classList.remove("text-[#0E7A81]");
   document.getElementById("modal").innerHTML = "";
   const div = document.createElement("div");
   div.innerHTML = `
-  <div class="modal-box">
-    <h3 class="text-lg font-bold">Hello!</h3>
+  <div class="modal-box flex justify-center flex-col items-center">
+      <p class="py-4 text-5xl text-red-600"><i class="fa-solid fa-hand-holding-heart"></i></p>
+    <h3 class="text-3xl font-bold">Congratulations</h3>
     <p class="py-4">Press ESC key or click the button below to close</p>
     <div class="modal-action">
       <form method="dialog">
