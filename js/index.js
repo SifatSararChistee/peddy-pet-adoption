@@ -7,13 +7,6 @@ const loadCatagories = async () => {
   displayCatagories(data.categories);
 };
 
-const removeClass = () => {
-  const buttons = document.getElementsByClassName("category-btn");
-  for (let btn of buttons) {
-    btn.classList.remove("active-btn");
-  }
-};
-
 //load Each category
 const loadEachCategory = async (category) => {
   const spinner = document.getElementById("spinner");
