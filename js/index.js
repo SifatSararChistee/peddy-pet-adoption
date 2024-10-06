@@ -16,6 +16,8 @@ const removeClass = () => {
 
 //load Each category
 const loadEachCategory = async (category) => {
+  const spinner = document.getElementById("spinner");
+  spinner.classList.remove("hidden");
   const response = await fetch(
     `https://openapi.programming-hero.com/api/peddy/category/${category}`
   );
@@ -23,7 +25,9 @@ const loadEachCategory = async (category) => {
   removeClass();
   const button = document.getElementById(`btn-${category}`);
   button.classList.add("active-btn");
-  displayCards(data.data);
+  setTimeout(function () {
+    displayCards(data.data);
+  }, 2000);
 };
 
 //display category buttons
@@ -50,6 +54,8 @@ const loadAllCards = async () => {
 
 //Display all cards
 const displayCards = (card) => {
+  const spinner = document.getElementById("spinner");
+  spinner.classList.add("hidden");
   if (card.length === 0) {
     document.getElementById("cards-container").innerHTML = "";
     const div = document.createElement("div");
@@ -59,6 +65,7 @@ const displayCards = (card) => {
       "items-center",
       "flex-col",
       "col-span-3",
+      "h-full",
       "bg-[#13131308]",
       "p-10"
     );
