@@ -23,7 +23,7 @@ const displayCatagories = (categories) => {
     const div = document.createElement("div");
     div.classList.add("flex", "justify-center", "items-center", "p-6");
     div.innerHTML = `
-        <button onclick='loadEachCategory("${category}")' class="btn w-[150px]"><img class="w-8" src="${category_icon}" alt="">${category}</button>
+        <button id=${category} onclick='loadEachCategory("${category}")' class="btn w-[150px]"><img class="w-8" src="${category_icon}" alt="">${category}</button>
     `;
     document.getElementById("catagories").append(div);
   });
@@ -41,8 +41,10 @@ const loadAllCards = async () => {
 //Display all cards
 const displayCards = (card) => {
   document.getElementById("cards-container").innerHTML = "";
+
   card.forEach((item) => {
-    const { pet_name, image, gender, date_of_birth, breed, price } = item;
+    const { pet_name, image, gender, date_of_birth, breed, price, category } =
+      item;
     const div = document.createElement("div");
     div.innerHTML = `
                   <div class="card bg-base-100 w-[300px] shadow-xl">
@@ -53,11 +55,21 @@ const displayCards = (card) => {
                     class="rounded-xl" />
                 </figure>
                 <div class="card-body items-start">
-                  <h2 class="card-title">${pet_name}</h2>
-                  <p><i class="fa-solid fa-list mr-2"></i>Breed: ${breed}</p>
-                  <p><i class="fa-regular fa-calendar mr-2"></i>Birth: ${date_of_birth}</p>
-                  <p><i class="fa-solid fa-mercury mr-2"></i>Gender: ${gender}</p>
-                  <p><i class="fa-solid fa-dollar-sign mr-2"></i>Price: ${price}</p>
+                  <h2 class="card-title">${
+                    pet_name == null ? "Not Mentioned" : pet_name
+                  }</h2>
+                  <p><i class="fa-solid fa-list mr-2"></i>Breed: ${
+                    breed == null ? "Not Mentioned" : breed
+                  }</p>
+                  <p><i class="fa-regular fa-calendar mr-2"></i>Birth: ${
+                    date_of_birth == null ? "Not Mentioned" : date_of_birth
+                  }</p>
+                  <p><i class="fa-solid fa-mercury mr-2"></i>Gender: ${
+                    gender == null ? "Not Mentioned" : gender
+                  }</p>
+                  <p><i class="fa-solid fa-dollar-sign mr-2"></i>Price: ${
+                    price == null ? "Not Mentioned" : price
+                  }</p>
                   <div class="flex justify-between w-full">
                     <button class="btn"><i class="fa-regular fa-thumbs-up"></i></button>
                     <button class="btn text-[#0E7A81]">Adopt</button>

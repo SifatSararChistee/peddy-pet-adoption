@@ -25,6 +25,12 @@
       .lato-font {
         font-family: "Lato", sans-serif;
       }
+      .active-btn{
+        box-sizing: border-box;
+        border: 1.5px solid rgb(14, 122, 129);
+        border-radius: 120px;
+        background: rgba(14, 122, 129, 0.1);
+      }
     </style>
   </head>
   <body class="lato-font">
@@ -148,7 +154,7 @@
          <div class="cards grid grid-cols-4">
                    <!-- left side -->
           <div id="cards-container" class="col-span-3 gap-4 grid grid-cols-3">
-
+            <div id="spinner" class="hidden"><span  class="loading loading-bars loading-lg">SIFat</span></div>
           </div>
                    <!-- right side -->
           <div>
@@ -158,7 +164,6 @@
 
        </section>
     </main>
-
     <!-- footer section -->
     <footer class="footer bg-[#131313] text-white p-10 mt-10">
       <section class="mx-auto w-11/12 max-w-screen-xl flex flex-col justify-center lg:flex-row md:flex-row lg:justify-between md:justify-between items-start md:items-center lg:items-center">     
