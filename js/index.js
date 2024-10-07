@@ -1,26 +1,34 @@
 //load category buttons
 const loadCatagories = async () => {
-  const response = await fetch(
-    "https://openapi.programming-hero.com/api/peddy/categories"
-  );
-  const data = await response.json();
-  displayCatagories(data.categories);
+  try {
+    const response = await fetch(
+      "https://openapi.programming-hero.com/api/peddy/categories"
+    );
+    const data = await response.json();
+    displayCatagories(data.categories);
+  } catch (error) {
+    console.error("Error fetching data:", error);
+  }
 };
 
 //load Each category
 const loadEachCategory = async (category) => {
-  const spinner = document.getElementById("spinner");
-  spinner.classList.remove("hidden");
-  const response = await fetch(
-    `https://openapi.programming-hero.com/api/peddy/category/${category}`
-  );
-  const data = await response.json();
-  removeClass();
-  const button = document.getElementById(`btn-${category}`);
-  button.classList.add("active-btn");
-  setTimeout(function () {
-    displayCards(data.data);
-  }, 2000);
+  try {
+    const spinner = document.getElementById("spinner");
+    spinner.classList.remove("hidden");
+    const response = await fetch(
+      `https://openapi.programming-hero.com/api/peddy/category/${category}`
+    );
+    const data = await response.json();
+    removeClass();
+    const button = document.getElementById(`btn-${category}`);
+    button.classList.add("active-btn");
+    setTimeout(function () {
+      displayCards(data.data);
+    }, 2000);
+  } catch (error) {
+    console.error("Error fetching data:", error);
+  }
 };
 
 //display category buttons
@@ -38,11 +46,15 @@ const displayCatagories = (categories) => {
 
 //load all cards
 const loadAllCards = async () => {
-  const response = await fetch(
-    "https://openapi.programming-hero.com/api/peddy/pets"
-  );
-  const data = await response.json();
-  displayCards(data.pets);
+  try {
+    const response = await fetch(
+      "https://openapi.programming-hero.com/api/peddy/pets"
+    );
+    const data = await response.json();
+    displayCards(data.pets);
+  } catch (error) {
+    console.error("Error fetching data:", error);
+  }
 };
 
 //Display all cards
@@ -113,16 +125,20 @@ const displayCards = (card) => {
 
 //like btn functions
 const likeBtn = async (id) => {
-  const response = await fetch(
-    `https://openapi.programming-hero.com/api/peddy/pet/${id}`
-  );
-  const data = await response.json();
-  const div = document.createElement("div");
-  div.classList.add("h-[100px]");
-  div.innerHTML = `
+  try {
+    const response = await fetch(
+      `https://openapi.programming-hero.com/api/peddy/pet/${id}`
+    );
+    const data = await response.json();
+    const div = document.createElement("div");
+    div.classList.add("h-[100px]");
+    div.innerHTML = `
   <img class="rounded-lg" src=${data.petData.image} alt="">
   `;
-  document.getElementById("right-side").append(div);
+    document.getElementById("right-side").append(div);
+  } catch (error) {
+    console.error("Error fetching data:", error);
+  }
 };
 
 //details btn functions
@@ -191,6 +207,7 @@ const detailsBtn = async (id) => {
   document.getElementById("modal").showModal();
 };
 
+//adopt btn functions
 const adoptBtn = async (id) => {
   const button = document.getElementById(`btn-${id}`);
   document.getElementById("modal").innerHTML = "";
@@ -222,6 +239,63 @@ const adoptBtn = async (id) => {
       button.disabled = true;
     }
   }, 1000);
+};
+
+//sorted functions
+const loadSortedCards = async () => {
+  try {
+    const response = await fetch(
+      "https://openapi.programming-hero.com/api/peddy/pets"
+    );
+    const data = await response.json();
+    sort(data.pets);
+  } catch (error) {
+    console.error("Error fetching data:", error);
+  }
+};
+
+const sort = (cards) => {
+  cards.sort((a, b) => {
+    const priceA = parseFloat(a.price);
+    const priceB = parseFloat(b.price);
+    return priceB - priceA;
+  });
+  document.getElementById("cards-container").innerHTML = "";
+  cards.forEach((item) => {
+    const { pet_name, image, gender, date_of_birth, breed, price, petId } =
+      item;
+    const div = document.createElement("div");
+    div.innerHTML = `
+          <div class="card bg-base-100 w-[300px] shadow-xl">
+              <figure class="px-6 pt-10">
+                  <img src="${image}" alt="Pet Image" class="rounded-xl" />
+              </figure>
+              <div class="card-body items-start">
+                  <h2 class="card-title">${
+                    pet_name == null ? "Not Mentioned" : pet_name
+                  }</h2>
+                  <p><i class="fa-solid fa-list mr-2"></i>Breed: ${
+                    breed == null ? "Not Mentioned" : breed
+                  }</p>
+                  <p><i class="fa-regular fa-calendar mr-2"></i>Birth: ${
+                    date_of_birth == null ? "Not Mentioned" : date_of_birth
+                  }</p>
+                  <p><i class="fa-solid fa-mercury mr-2"></i>Gender: ${
+                    gender == null ? "Not Mentioned" : gender
+                  }</p>
+                  <p><i class="fa-solid fa-dollar-sign mr-2"></i>Price: ${
+                    price == null ? "Not Mentioned" : price
+                  }</p>
+                  <div class="flex justify-between w-full">
+                      <button onclick="likeBtn(${petId})" class="btn"><i class="fa-regular fa-thumbs-up"></i></button>
+                      <button id="btn-${petId}" onclick="adoptBtn(${petId})" class="btn text-[#0E7A81]">Adopt</button>
+                      <button onclick="detailsBtn(${petId})" class="btn text-[#0E7A81]">Details</button>
+                  </div>
+              </div>
+          </div>
+      `;
+    document.getElementById("cards-container").append(div);
+  });
 };
 
 loadCatagories();
