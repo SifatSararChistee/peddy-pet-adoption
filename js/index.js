@@ -154,15 +154,23 @@ const detailsBtn = async (id) => {
     }</h3>
     <div class="flex justify-between">
       <div>
-        <p>Breed: ${breed == null ? "Not Mentioned" : breed}</p>
-        <p>Gender: ${gender == null ? "Not Mentioned" : gender}</p>
-        <p>Vaccinated Status: ${
+        <p><i class="fa-solid fa-list mr-2"></i>Breed: ${
+          breed == null ? "Not Mentioned" : breed
+        }</p>
+        <p><i class="fa-solid fa-mercury mr-2"></i>Gender: ${
+          gender == null ? "Not Mentioned" : gender
+        }</p>
+        <p><i class="fa-solid fa-syringe mr-2"></i>Vaccinated Status: ${
           vaccinated_status == null ? "Not Mentioned" : vaccinated_status
         }</p>
       </div>
       <div>
-        <p>Birth: ${date_of_birth == null ? "Not Mentioned" : date_of_birth}</p>
-        <p>Price: ${price == null ? "Not Mentioned" : price}</p>
+        <p><i class="fa-regular fa-calendar mr-2"></i>Birth: ${
+          date_of_birth == null ? "Not Mentioned" : date_of_birth
+        }</p>
+        <p><i class="fa-solid fa-dollar-sign mr-2"></i>Price: ${
+          price == null ? "Not Mentioned" : price
+        }</p>
       </div>
     </div>
 
@@ -199,7 +207,6 @@ const adoptBtn = async (id) => {
     <p class="py-4">Press ESC key or click the button below to close</p>
     <div class="modal-action">
       <form method="dialog">
-        <!-- if there is a button in form, it will close the modal -->
         <button class="btn">Close</button>
       </form>
     </div>
