@@ -191,29 +191,38 @@ const detailsBtn = async (id) => {
   document.getElementById("modal").showModal();
 };
 
-//adopt btn functions
 const adoptBtn = async (id) => {
-  console.log(id);
   const button = document.getElementById(`btn-${id}`);
-  button.innerText = "Adopted";
-  button.classList.add("bg-[#0E7A81]", "text-white");
-  button.classList.remove("text-[#0E7A81]");
   document.getElementById("modal").innerHTML = "";
   const div = document.createElement("div");
   div.innerHTML = `
-  <div class="modal-box flex justify-center flex-col items-center">
+    <div class="modal-box flex justify-center flex-col items-center overflow-hidden">
       <p class="py-4 text-5xl text-red-600"><i class="fa-solid fa-hand-holding-heart"></i></p>
-    <h3 class="text-3xl font-bold">Congratulations</h3>
-    <p class="py-4">Press ESC key or click the button below to close</p>
-    <div class="modal-action">
-      <form method="dialog">
-        <button class="btn">Close</button>
-      </form>
+      <h3 class="text-3xl font-bold">Congratulations</h3>
+      <p class="py-4 text-xl font-bold text-center">Adoption process is started for your pet</p>
+      <p class="py-4"><span id="counter" class="countdown font-mono text-6xl">3</span></p>
+      </div>
     </div>
-  </div>
   `;
+
   document.getElementById("modal").append(div);
   document.getElementById("modal").showModal();
+
+  let counter = 3;
+  const countdownElement = document.getElementById("counter");
+
+  const interval = setInterval(() => {
+    counter--;
+    countdownElement.textContent = counter;
+
+    if (counter === 1) {
+      clearInterval(interval);
+      document.getElementById("modal").close();
+      button.innerText = "Adopted";
+      button.classList.add("bg-[#0E7A81]", "text-white");
+      button.classList.remove("text-[#0E7A81]");
+    }
+  }, 1000);
 };
 
 loadCatagories();
