@@ -219,8 +219,7 @@ const adoptBtn = async (id) => {
       clearInterval(interval);
       document.getElementById("modal").close();
       button.innerText = "Adopted";
-      button.classList.add("bg-[#0E7A81]", "text-white");
-      button.classList.remove("text-[#0E7A81]");
+      button.disabled = true;
     }
   }, 1000);
 };
